@@ -7,10 +7,8 @@ export function buildApp(options: FastifyServerOptions = {}) {
   });
 
   app.get('/', async () => {
-    return {
-      message: 'CI/CD Lab Fastify app is running',
-      version: process.env.APP_VERSION || 'dev'
-    };
+    // Type error: undefinedVariable does not exist
+    return undefinedVariable;
   });
 
   app.get('/health', async () => {
