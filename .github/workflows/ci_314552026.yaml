@@ -4,11 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop
   pull_request:
-    branches:
-      - main
-      - develop
 
 jobs:
   ci:
@@ -45,23 +41,3 @@ jobs:
       # Step 6: Run tests
       - name: Run tests
         run: npm run test
-
-      # Step 7: Upload test results
-      - name: Upload test results
-        if: always()
-        uses: dorny/test-reporter@v1
-        with:
-          name: Test Results
-          path: 'dist/coverage/**/*.xml'
-          reporter: 'java-junit'
-          fail-on-error: true
-        continue-on-error: true
-
-      # Step 8: Test summary
-      - name: Test Summary
-        if: always()
-        run: |
-          echo "## CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✓ TypeScript typecheck passed" >> $GITHUB_STEP_SUMMARY
-          echo "✓ Prettier format check passed" >> $GITHUB_STEP_SUMMARY
-          echo "✓ Tests passed" >> $GITHUB_STEP_SUMMARY
